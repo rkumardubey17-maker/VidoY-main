@@ -6,13 +6,10 @@ import { DB_NAME } from "../constants.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const rootEnvPath = path.resolve(__dirname, "../../..", ".env");
 const serverEnvPath = path.resolve(__dirname, "../..", ".env");
 
-for (const envPath of [rootEnvPath, serverEnvPath]) {
-  if (fs.existsSync(envPath)) {
-    dotenv.config({ path: envPath, override: envPath === serverEnvPath });
-  }
+if (fs.existsSync(serverEnvPath)) {
+  dotenv.config({ path: serverEnvPath });
 }
 
 const read = (key, fallback = "") => process.env[key]?.trim() || fallback;
