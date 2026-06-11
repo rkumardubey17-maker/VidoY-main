@@ -136,7 +136,19 @@ npm start
   "mongoose-paginate-v2": "^1.9.4",
   "multer": "^2.1.1"
 }
+
 ```
+## GitHub Repository
+
+🔗 Repository: https://github.com/rkumardubey17-maker/VidoY-main
+
+## Note
+
+The project was recently redeployed and the current live URL is:
+
+https://vido-y-main-8i72.vercel.app
+
+If any older URL is referenced elsewhere, please use the live URL above.
 
 ## Author
 
