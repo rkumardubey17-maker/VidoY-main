@@ -106,19 +106,24 @@ const getAllRecommendedVideos = asyncHandler(async (req, res) => {
 });
 
 const publishVideo = asyncHandler(async (req, res) => {
- console.log("FILES:", req.files);
-console.log("BODY:", req.body);
-console.log("Video Path:", videoFileLocalPath);
-console.log("Thumbnail Path:", thumbnailLocalPath);
+  console.log("FILES:", req.files);
+  console.log("BODY:", req.body);
+
   const { title, description } = req.body;
+
+  const videoFileLocalPath = req.files?.videoFile?.[0]?.path;
+  const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
+
+  console.log("Video Path:", videoFileLocalPath);
+  console.log("Thumbnail Path:", thumbnailLocalPath);
+
+  
 
   if (!title) {
     throw new ApiError(400, "All fields are required");
   }
 
-  const videoFileLocalPath = req.files?.videoFile[0]?.path;
-  const thumbnailLocalPath = req.files?.thumbnail[0]?.path;
-
+ 
   if (!videoFileLocalPath) throw new ApiError(400, "Video File is required");
   if (!thumbnailLocalPath) throw new ApiError(400, "Thumbnail is required");
 
