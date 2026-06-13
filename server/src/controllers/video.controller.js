@@ -106,7 +106,7 @@ const getAllRecommendedVideos = asyncHandler(async (req, res) => {
 });
 
 const publishVideo = asyncHandler(async (req, res) => {
-  console.log("FILES:", req.files);
+  console.log("FILES:", JSON.stringify(req.files, null, 2));
   console.log("BODY:", req.body);
 
   const { title, description } = req.body;
@@ -114,19 +114,22 @@ const publishVideo = asyncHandler(async (req, res) => {
   const videoFileLocalPath = req.files?.videoFile?.[0]?.path;
   const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
 
-  console.log("Video Path:", videoFileLocalPath);
-  console.log("Thumbnail Path:", thumbnailLocalPath);
+  console.log("VIDEO PATH:", videoFileLocalPath);
+  console.log("THUMBNAIL PATH:", thumbnailLocalPath);
 
-  
-
-  if (!title) {
-    throw new ApiError(400, "All fields are required");
+  if (!videoFileLocalPath) {
+    return res.status(400).json({
+      message: "videoFile path missing",
+      files: req.files,
+    });
   }
 
- 
-  if (!videoFileLocalPath) throw new ApiError(400, "Video File is required");
-  if (!thumbnailLocalPath) throw new ApiError(400, "Thumbnail is required");
-
+  if (!thumbnailLocalPath) {
+    return res.status(400).json({
+      message: "thumbnail path missing",
+      files: req.files,
+    });
+  }
   const videoFile = await uploadOnCloudinary(videoFileLocalPath);
   // console.log("VIDEO FILE", videoFile);
   if (!videoFile) throw new ApiError(400, "Cloudinary: Video File is required");
