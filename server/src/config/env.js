@@ -83,10 +83,12 @@ if (missingVariables.length) {
 }
 
 const cookieSecure = read("COOKIE_SECURE", String(isProduction)) === "true";
-const cookieSameSite = read(
-  "COOKIE_SAME_SITE",
-  cookieSecure ? "none" : "lax"
-).toLowerCase();
+// const cookieSameSite = read(
+//   "COOKIE_SAME_SITE",
+//   cookieSecure ? "none" : "lax"
+// ).toLowerCase();
+const cookieSameSite = "none";
+const cookieSecure = true;
 
 export const env = {
   NODE_ENV: nodeEnv,

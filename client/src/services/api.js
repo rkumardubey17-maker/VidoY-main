@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 // Endpoints functions
 export const createAccount = (userData) => {
-  axiosInstance.post("/users/register", userData, {
+  return axiosInstance.post("/users/register", userData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
