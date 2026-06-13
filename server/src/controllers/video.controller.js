@@ -106,8 +106,10 @@ const getAllRecommendedVideos = asyncHandler(async (req, res) => {
 });
 
 const publishVideo = asyncHandler(async (req, res) => {
-  console.log("FILES:", req.files);
+ console.log("FILES:", req.files);
 console.log("BODY:", req.body);
+console.log("Video Path:", videoFileLocalPath);
+console.log("Thumbnail Path:", thumbnailLocalPath);
   const { title, description } = req.body;
 
   if (!title) {

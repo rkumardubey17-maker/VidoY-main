@@ -27,10 +27,14 @@ const uploadOnCloudinary = async (localFilePath) => {
     fs.unlinkSync(localFilePath); // Removing temporarily stored file from server
     return response;
   } catch (error) {
+  console.error("Cloudinary Upload Error:", error);
+
+  if (localFilePath && fs.existsSync(localFilePath)) {
     fs.unlinkSync(localFilePath);
-    //Removes the file which is temporarily stored in the server
-    return null;
   }
+
+  return null;
+}
 };
 
 const deleteFromCloudinary = async (publicId) => {
