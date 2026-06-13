@@ -1,5 +1,7 @@
+import { ApiError } from "./ApiError.js";
+
 const errorHandler = (err, req, res, next) => {
-  console.error("ACTUAL ERROR:", err);
+  console.error("ACTUAL ERROR =>", err);
 
   if (err instanceof ApiError) {
     return res.status(err.statusCode).json({
@@ -13,7 +15,6 @@ const errorHandler = (err, req, res, next) => {
   return res.status(500).json({
     success: false,
     message: err.message,
-    stack: err.stack,
   });
 };
 
